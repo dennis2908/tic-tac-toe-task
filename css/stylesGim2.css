@@ -1,14 +1,14 @@
 div {
-	vertical-align: middle;
+	vertical-align: center;
         text-align: center;
 }
 
 #indikatorGanti{
-	font-size: 15px;
-	margin-bottom: 15px;
+	font-size: 10px;
+	margin-bottom: 10px;
 }
 
 #gim{
-	font-size: 50px;
-	margin-bottom: 20px;
+	font-size: 15px;
+	margin-bottom: 10px;
 }
