@@ -1,11 +1,41 @@
 // Run script after DOM has loaded
+
+
+function validate(evt) {
+	evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+	
+	document.getElementById('papan').innerHTML = "( "+evt.key+" x "+evt.key+" ) ";
+	
+    return true;
+
+    	
+  } 
+  
 document.addEventListener('DOMContentLoaded', function() {
 
 // Store submit button in a variable for easy reference
+
 var optionsButton = document.getElementById("options_submit");
 
 // Capture input value to determine board size and color and set up the board
 optionsButton.addEventListener("click", function(){
+	
+
+// Set board size according to input value parsed to integer
+var boardSize = parseInt(document.getElementById("boardsize_input").value);
+
+var minboardSize = parseInt(document.getElementById("boardsize_input").min);
+
+if(boardSize < minboardSize){
+	
+	alert("Ukuran Board lebih kecil dari "+minboardSize);
+	return false;
+}
+	
 
 // If play button is clicked, change to reset
 optionsButton.innerHTML = "Reset";
@@ -43,8 +73,6 @@ function allSame(array) { // Ultimately got this solution from stack overflow, I
 // * Fun! Let the user choose the background color
 var customBackground = '#eeeeee';
 
-// Set board size according to input value parsed to integer
-var boardSize = parseInt(document.getElementById("boardsize_input").value);
 
 // Create variable game board (empty array)
 var gameBoard = [];
@@ -129,7 +157,7 @@ var boardClicks = 0;
 board.addEventListener("click", function() {
 if (determineWinner()) { // determineWinner will return true if it finds a winning combination
 	turnIndicator.style.color = "blue";
-	turnIndicator.innerHTML = winningPlayer[0] + ' menang !';
+	turnIndicator.innerHTML = winningPlayer[0] + ' MENANG !';
 } else if (isEven(boardClicks)) {
 	turnIndicator.style.color = "red";
 	turnIndicator.innerHTML = "Giliran O";
@@ -228,7 +256,7 @@ var countClicks = function() {
 		this.style.color = "red";
 	// If local click counter is greater than 1, alert player and subtract 1 from global clicks
 	} else if (!determineWinner()){
-		alert('You cannot move there. That space is taken.');
+		alert('Tidak bisa pindah kesini. Sudah ada yang tempati.');
 		boardClicks -= 1;
 	} else {
 	};

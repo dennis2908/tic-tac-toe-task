@@ -9,8 +9,8 @@ div {
 }
 
 #turnIndicator {
-	font-size: 20px;
-	margin-bottom: 20px;
+	font-size: 15px;
+	margin-bottom: 15px;
 }
 
 #game {
@@ -37,8 +37,8 @@ input {
 }
 
 button {
-	margin-top: 20px;
-	margin-bottom: 40px;
-	font-size: 20px;
-	padding: 10px 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	padding: 10px 15px;
 }
