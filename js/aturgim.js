@@ -20,23 +20,23 @@ function validate(evt,val) {
  }
  
  function doReload(){
-	 document.getElementById('boardsize_input').value = 3;
+	 document.getElementById('ukuran_data').value = 3;
 	 location.reload()
  }
   
 document.addEventListener('DOMContentLoaded', function() {
 
 
-var optionsButton = document.getElementById("options_submit");
+var optionsButton = document.getElementById("submit_play");
 
 optionsButton.addEventListener("click", function(){
 	
 
-var boardSize = parseInt(document.getElementById("boardsize_input").value);
+var boardSize = parseInt(document.getElementById("ukuran_data").value);
 
-var minboardSize = parseInt(document.getElementById("boardsize_input").min);
+var minboardSize = parseInt(document.getElementById("ukuran_data").min);
 
-var maxboardSize = parseInt(document.getElementById("boardsize_input").max);
+var maxboardSize = parseInt(document.getElementById("ukuran_data").max);
 
 if(boardSize < minboardSize || boardSize > maxboardSize){
 	
@@ -47,7 +47,7 @@ if(boardSize < minboardSize || boardSize > maxboardSize){
 
 optionsButton.innerHTML = "Reset";
 
-function isEven(value){
+function CekGenap(value){
     if (value % 2 == 0) {
        	return true;
     } else {
@@ -55,7 +55,7 @@ function isEven(value){
 	};
 };
 
-function isOdd(value){
+function cekSatu(value){
 	if (value % 1 == 0) {
 		return true;
 	} else {
@@ -63,7 +63,7 @@ function isOdd(value){
 	};
 };
 
-function allSame(array) 
+function cekMirip(array) 
 { 
    
     var first = array[0];
@@ -80,17 +80,17 @@ function allSame(array)
 var customBackground = '#eeeeee';
 
 
-var gameBoard = [];
+var gimBoard = [];
 
-var numSquares = (boardSize * boardSize);
+var numkotakDatas = (boardSize * boardSize);
 
-for (var i = 0; i < numSquares; i++) {
-	gameBoard.push(i);
+for (var i = 0; i < numkotakDatas; i++) {
+	gimBoard.push(i);
 };
 
-document.getElementById("game").innerHTML = '<div id="board"></div>';
+document.getElementById("gim").innerHTML = '<div id="tic-tac"></div>';
 
-var board = document.getElementById("board");
+var board = document.getElementById("tic-tac");
 
 board.style.margin = '0 auto';
 
@@ -99,123 +99,123 @@ board.style.width = (100 * boardSize) + 'px';
 
 board.style.border = 'solid 1px black';
 
-for (var i = 0; i < numSquares; i++) {
-	board.innerHTML += '<div class="square"></div>'; 
+for (var i = 0; i < numkotakDatas; i++) {
+	board.innerHTML += '<div class="kotakData"></div>'; 
 };
 
-var squares = document.getElementsByClassName("square");
+var kotakDatas = document.getElementsByClassName("kotakData");
 
-for (var i = 0; i < numSquares; i++) {
-	squares[i].style.height = '100px';
-	squares[i].style.width = '100px';
-	squares[i].style.float = "left";
-	squares[i].style.lineHeight = "100px";
-	squares[i].setAttribute("id", i.toString());
+for (var i = 0; i < numkotakDatas; i++) {
+	kotakDatas[i].style.height = '100px';
+	kotakDatas[i].style.width = '100px';
+	kotakDatas[i].style.float = "left";
+	kotakDatas[i].style.lineHeight = "100px";
+	kotakDatas[i].setAttribute("id", i.toString());
 };
 
-if (numSquares % 2 !== 0) { 
+if (numkotakDatas % 2 !== 0) { 
 
-	for (var i = 0; i < numSquares; i += 2) { 
-		squares[i].style.backgroundColor = customBackground;
+	for (var i = 0; i < numkotakDatas; i += 2) { 
+		kotakDatas[i].style.backgroundColor = customBackground;
 	};
 } else { 
-	for (i = 0; i < numSquares; i += 1) {
-		if (isEven(i/boardSize)) { 
-			for (var squareNum = i; squareNum < (i + boardSize); squareNum += 2) {
-				squares[squareNum].style.backgroundColor = customBackground;	
+	for (i = 0; i < numkotakDatas; i += 1) {
+		if (CekGenap(i/boardSize)) { 
+			for (var kotakDataNum = i; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
+				kotakDatas[kotakDataNum].style.backgroundColor = customBackground;	
 			};
-		} else if (isOdd(i/boardSize)) { // make odd rows alternate color
-			for (var squareNum = i+1; squareNum < (i + boardSize); squareNum += 2) {
-				squares[squareNum].style.backgroundColor = customBackground;	
+		} else if (cekSatu(i/boardSize)) { // make odd rows alternate color
+			for (var kotakDataNum = i+1; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
+				kotakDatas[kotakDataNum].style.backgroundColor = customBackground;	
 			};
 		} else {
 		};
 	};
 };
 
-var turnIndicator = document.getElementById("turnIndicator")
+var indikatorGanti = document.getElementById("indikatorGanti")
 
-turnIndicator.style.color = "black";
-turnIndicator.innerHTML = "X's Turn";
+indikatorGanti.style.color = "black";
+indikatorGanti.innerHTML = "X's Turn";
 
 var boardClicks = 0;
 
 board.addEventListener("click", function() {
 if (determineWinner()) { 
-	turnIndicator.style.color = "blue";
-	turnIndicator.innerHTML = winningPlayer[0] + ' WINS !';
-} else if (isEven(boardClicks)) {
-	turnIndicator.style.color = "red";
-	turnIndicator.innerHTML = "O's Turn";
+	indikatorGanti.style.color = "blue";
+	indikatorGanti.innerHTML = winningPlayer[0] + ' WINS !';
+} else if (CekGenap(boardClicks)) {
+	indikatorGanti.style.color = "red";
+	indikatorGanti.innerHTML = "O's Turn";
 } else {
-	turnIndicator.style.color = "black";
-	turnIndicator.innerHTML = "X's Turn";
+	indikatorGanti.style.color = "black";
+	indikatorGanti.innerHTML = "X's Turn";
 };
 boardClicks++;
 }); 
 
-var squareClicks = [];
+var kotakDataClicks = [];
 
-for (var i = 0; i < numSquares; i++) {
-	squareClicks[i] = 0;
+for (var i = 0; i < numkotakDatas; i++) {
+	kotakDataClicks[i] = 0;
 };
 
 var winningPlayer;
 
 var determineWinner = function() {
-	for (i = 0; i < numSquares; i += 1) { 
+	for (i = 0; i < numkotakDatas; i += 1) { 
 		if ((i % boardSize) == 0) {
 			var rowCheck = [];
-			for (var squareNum = i; squareNum < (i + boardSize); squareNum += 1) { 
-				rowCheck.push(squares[squareNum].innerHTML);
+			for (var kotakDataNum = i; kotakDataNum < (i + boardSize); kotakDataNum += 1) { 
+				rowCheck.push(kotakDatas[kotakDataNum].innerHTML);
 			};
 			console.log('Row ' + i + ' is ' + rowCheck);
-			console.log(allSame(rowCheck));
+			console.log(cekMirip(rowCheck));
 
-			if (allSame(rowCheck)) {
+			if (cekMirip(rowCheck)) {
 				winningPlayer = rowCheck; 
 				return true;
 			};
 		};
 	};
-	for (i = 0; i < numSquares; i += 1) { 
+	for (i = 0; i < numkotakDatas; i += 1) { 
 		if (i < boardSize) { 
 			var colCheck = [];
-			for (var squareNum = i; squareNum < numSquares; squareNum += boardSize) { 
-				colCheck.push(squares[squareNum].innerHTML);
+			for (var kotakDataNum = i; kotakDataNum < numkotakDatas; kotakDataNum += boardSize) { 
+				colCheck.push(kotakDatas[kotakDataNum].innerHTML);
 			};
 			console.log('Column ' + i + 'is ' + colCheck);
-			console.log(allSame(colCheck));
+			console.log(cekMirip(colCheck));
 			
-			if (allSame(colCheck)) {
+			if (cekMirip(colCheck)) {
 				winningPlayer = colCheck; 
 				return true;
 			};	
 		};
 	};
 	var diag1Check = []; 
-	for (i = 0; i < numSquares; i += 1) { 
+	for (i = 0; i < numkotakDatas; i += 1) { 
 		if ((i % (boardSize + 1)) == 0) { 
 			console.log(i)
-			diag1Check.push(squares[i].innerHTML);
+			diag1Check.push(kotakDatas[i].innerHTML);
 		};
 	};
 	console.log(diag1Check) 
-	console.log(allSame(diag1Check));
-	if (allSame(diag1Check)) { 
+	console.log(cekMirip(diag1Check));
+	if (cekMirip(diag1Check)) { 
 		winningPlayer = diag1Check; 
 		return true;
 	};
 	var diag2Check = []; 
-	for (i = (boardSize - 1); i < (numSquares - 1); i += 1) { 
+	for (i = (boardSize - 1); i < (numkotakDatas - 1); i += 1) { 
 		if ((i % (boardSize - 1)) == 0) { 
 			console.log(i)
-			diag2Check.push(squares[i].innerHTML);
+			diag2Check.push(kotakDatas[i].innerHTML);
 		};
 	};
 	console.log(diag2Check) 
-	console.log(allSame(diag2Check));
-	if (allSame(diag2Check)) { 
+	console.log(cekMirip(diag2Check));
+	if (cekMirip(diag2Check)) { 
 		winningPlayer = diag2Check; 
 		return true;
 	};
@@ -223,10 +223,10 @@ var determineWinner = function() {
 
 var countClicks = function() {
 	var divID = this.getAttribute("id");
-	squareClicks[divID] += 1;
-	if (isEven(boardClicks) && squareClicks[divID] == 1) {
+	kotakDataClicks[divID] += 1;
+	if (CekGenap(boardClicks) && kotakDataClicks[divID] == 1) {
 		this.innerHTML = 'X';
-	} else if (isOdd(boardClicks) && squareClicks[divID] == 1) {
+	} else if (cekSatu(boardClicks) && kotakDataClicks[divID] == 1) {
 		this.innerHTML = 'O';
 		this.style.color = "red";
 	} else if (!determineWinner()){
@@ -235,15 +235,15 @@ var countClicks = function() {
 	} else {
 	};
 	if (determineWinner()) { 
-		for (var i = 0; i < numSquares; i++) {
-			squareClicks[i] = 2;
+		for (var i = 0; i < numkotakDatas; i++) {
+			kotakDataClicks[i] = 2;
 		};
-		document.getElementById("options_submit").innerHTML = "Play Again ?"
+		document.getElementById("submit_play").innerHTML = "Play Again ?"
 	};
 };
 
-for (var i = 0; i < numSquares; i++) {
-	squares[i].addEventListener("click", countClicks);
+for (var i = 0; i < numkotakDatas; i++) {
+	kotakDatas[i].addEventListener("click", countClicks);
 };
 
 }); 
