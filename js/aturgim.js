@@ -18,7 +18,11 @@ function validate(evt,val) {
  function change(val) {
 	 papan_alert(val)
  }
-  
+ 
+ function doReload(){
+	 document.getElementById('boardsize_input').value = 3;
+	 location.reload()
+ }
   
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -32,9 +36,11 @@ var boardSize = parseInt(document.getElementById("boardsize_input").value);
 
 var minboardSize = parseInt(document.getElementById("boardsize_input").min);
 
-if(boardSize < minboardSize){
+var maxboardSize = parseInt(document.getElementById("boardsize_input").max);
+
+if(boardSize < minboardSize || boardSize > maxboardSize){
 	
-	alert("Board size is smaller than "+minboardSize);
+	alert("Board Type size must be larger than "+minboardSize+" and smaller than "+maxboardSize);
 	return false;
 }
 	
