@@ -156,7 +156,7 @@ var turnIndicator = document.getElementById("turnIndicator")
 
 // After board is made, indicate who goes first
 turnIndicator.style.color = "black";
-turnIndicator.innerHTML = "Giliran X";
+turnIndicator.innerHTML = "X's Turn";
 
 // Declare a global click counter
 var boardClicks = 0;
@@ -165,13 +165,13 @@ var boardClicks = 0;
 board.addEventListener("click", function() {
 if (determineWinner()) { // determineWinner will return true if it finds a winning combination
 	turnIndicator.style.color = "blue";
-	turnIndicator.innerHTML = winningPlayer[0] + ' MENANG !';
+	turnIndicator.innerHTML = winningPlayer[0] + ' WINS !';
 } else if (isEven(boardClicks)) {
 	turnIndicator.style.color = "red";
-	turnIndicator.innerHTML = "Giliran O";
+	turnIndicator.innerHTML = "O's Turn";
 } else {
 	turnIndicator.style.color = "black";
-	turnIndicator.innerHTML = "Giliran X";
+	turnIndicator.innerHTML = "X's Turn";
 };
 boardClicks++;
 }); // End board click function
@@ -264,7 +264,7 @@ var countClicks = function() {
 		this.style.color = "red";
 	// If local click counter is greater than 1, alert player and subtract 1 from global clicks
 	} else if (!determineWinner()){
-		alert('Tidak bisa pindah kesini. Sudah ada yang tempati.');
+		alert('Can"t move to this block.');
 		boardClicks -= 1;
 	} else {
 	};
@@ -275,7 +275,7 @@ var countClicks = function() {
 			squareClicks[i] = 2;
 		};
 		// Change play button to say play again
-		document.getElementById("options_submit").innerHTML = "Main Lagi?"
+		document.getElementById("options_submit").innerHTML = "Play Again ?"
 	};
 };
 

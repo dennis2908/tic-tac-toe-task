@@ -10,14 +10,12 @@
 		<h1>Gim Tic Tac Toe</h1>
 	</div>
 	<div id="options">
-	
-	<div><h4>Pilihan : <h4></div>
 		<form id="options">
-			<label for="boardsize_input"><b>Ukuran Papan :</b></label>
+			<label for="boardsize_input"><b>Board Type :</b></label>
 				<input id="boardsize_input" type="number" min="2" max="50" onchange='change(this.value)' onkeypress='return  validate(event)' value="3" /><label id="papan">( 3 x 3 )</label>
-				<div><h4>(Ukuran Papan minimal 2 x 2)<h4></div>
+				<div><h4>(Minimal Board Type is 2 x 2)<h4></div>
 		</form>
-		<button id="options_submit">Main</button>
+		<button id="options_submit">Play</button>
 		<button onclick="location.reload()">Reload</button>
 	</div>
 	<div id="turnIndicator"></div>
