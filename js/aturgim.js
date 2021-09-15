@@ -70,14 +70,16 @@ function cekMirip(array)
 
     if (array[0] == "") {
     	return false;
-    } else {
+    } 
+	else 
+	{
     	return array.every(function(element) {
         	return element == first;
     	});
     };
 };
 
-var customBackground = '#eeeeee';
+var backdasar = '#eeeeee';
 
 
 var gimBoard = [];
@@ -116,17 +118,17 @@ for (var i = 0; i < numkotakDatas; i++) {
 if (numkotakDatas % 2 !== 0) { 
 
 	for (var i = 0; i < numkotakDatas; i += 2) { 
-		kotakDatas[i].style.backgroundColor = customBackground;
+		kotakDatas[i].style.backgroundColor = backdasar;
 	};
 } else { 
 	for (i = 0; i < numkotakDatas; i += 1) {
 		if (CekGenap(i/boardSize)) { 
 			for (var kotakDataNum = i; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
-				kotakDatas[kotakDataNum].style.backgroundColor = customBackground;	
+				kotakDatas[kotakDataNum].style.backgroundColor = backdasar;	
 			};
-		} else if (cekSatu(i/boardSize)) { // make odd rows alternate color
+		} else if (cekSatu(i/boardSize)) {
 			for (var kotakDataNum = i+1; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
-				kotakDatas[kotakDataNum].style.backgroundColor = customBackground;	
+				kotakDatas[kotakDataNum].style.backgroundColor = backdasar;	
 			};
 		} else {
 		};
@@ -141,7 +143,7 @@ indikatorGanti.innerHTML = "X's Turn";
 var boardClicks = 0;
 
 board.addEventListener("click", function() {
-if (determineWinner()) { 
+if (pemenang()) { 
 	indikatorGanti.style.color = "blue";
 	indikatorGanti.innerHTML = winningPlayer[0] + ' WINS !';
 } else if (CekGenap(boardClicks)) {
@@ -162,7 +164,7 @@ for (var i = 0; i < numkotakDatas; i++) {
 
 var winningPlayer;
 
-var determineWinner = function() {
+var pemenang = function() {
 	for (i = 0; i < numkotakDatas; i += 1) { 
 		if ((i % boardSize) == 0) {
 			var rowCheck = [];
@@ -229,12 +231,12 @@ var countClicks = function() {
 	} else if (cekSatu(boardClicks) && kotakDataClicks[divID] == 1) {
 		this.innerHTML = 'O';
 		this.style.color = "red";
-	} else if (!determineWinner()){
+	} else if (!pemenang()){
 		alert('Can"t move to this block.');
 		boardClicks -= 1;
 	} else {
 	};
-	if (determineWinner()) { 
+	if (pemenang()) { 
 		for (var i = 0; i < numkotakDatas; i++) {
 			kotakDataClicks[i] = 2;
 		};
