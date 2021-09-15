@@ -7,13 +7,21 @@ function validate(evt) {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
         return false;
     }
-	
-	document.getElementById('papan').innerHTML = "( "+evt.key+" x "+evt.key+" ) ";
-	
+	papan_alert(evt.key)
     return true;
 
     	
   } 
+  
+  function papan_alert(nil) {
+	  document.getElementById('papan').innerHTML = "( "+nil+" x "+nil+" ) ";
+	  
+  }
+  
+ function change(val) {
+	 papan_alert(val)
+ }
+  
   
 document.addEventListener('DOMContentLoaded', function() {
 

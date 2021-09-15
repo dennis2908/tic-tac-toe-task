@@ -14,7 +14,7 @@
 	<div><h4>Pilihan : <h4></div>
 		<form id="options">
 			<label for="boardsize_input"><b>Ukuran Papan :</b></label>
-				<input id="boardsize_input" type="number" min="2" max="50" onkeypress='return  validate(event)' value="3" /><label id="papan">( 3 x 3 )</label>
+				<input id="boardsize_input" type="number" min="2" max="50" onchange='change(this.value)' onkeypress='return  validate(event)' value="3" /><label id="papan">( 3 x 3 )</label>
 				<div><h4>(Ukuran Papan minimal 2 x 2)<h4></div>
 		</form>
 		<button id="options_submit">Main!</button>
