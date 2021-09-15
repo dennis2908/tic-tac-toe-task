@@ -20,7 +20,7 @@ function validate(evt,val) {
  }
  
  function doReload(){
-	 document.getElementById('ukuran_data').value = 3;
+	 document.getElementById('ukuran_data').value = 2;
 	 location.reload()
  }
   
@@ -32,15 +32,15 @@ var optionsButton = document.getElementById("submit_play");
 optionsButton.addEventListener("click", function(){
 	
 
-var boardSize = parseInt(document.getElementById("ukuran_data").value);
+var papanKOSize = parseInt(document.getElementById("ukuran_data").value);
 
-var minboardSize = parseInt(document.getElementById("ukuran_data").min);
+var minpapanKOSize = parseInt(document.getElementById("ukuran_data").min);
 
-var maxboardSize = parseInt(document.getElementById("ukuran_data").max);
+var maxpapanKOSize = parseInt(document.getElementById("ukuran_data").max);
 
-if(boardSize < minboardSize || boardSize > maxboardSize){
+if(papanKOSize < minpapanKOSize || papanKOSize > maxpapanKOSize){
 	
-	alert("Board Type size must be larger than "+minboardSize+" and smaller than "+maxboardSize);
+	alert("papanKO Type size must be larger than "+minpapanKOSize+" and smaller than "+maxpapanKOSize);
 	return false;
 }
 	
@@ -82,27 +82,27 @@ function cekMirip(array)
 var backdasar = '#eeeeee';
 
 
-var gimBoard = [];
+var gimpapanKO = [];
 
-var numkotakDatas = (boardSize * boardSize);
+var numkotakDatas = (papanKOSize * papanKOSize);
 
 for (var i = 0; i < numkotakDatas; i++) {
-	gimBoard.push(i);
+	gimpapanKO.push(i);
 };
 
 document.getElementById("gim").innerHTML = '<div id="tic-tac"></div>';
 
-var board = document.getElementById("tic-tac");
+var papanKO = document.getElementById("tic-tac");
 
-board.style.margin = '0 auto';
+papanKO.style.margin = '0 auto';
 
-board.style.height = (100 * boardSize) + 'px';
-board.style.width = (100 * boardSize) + 'px';
+papanKO.style.height = (100 * papanKOSize) + 'px';
+papanKO.style.width = (100 * papanKOSize) + 'px';
 
-board.style.border = 'solid 1px black';
+papanKO.style.border = 'solid 1px black';
 
 for (var i = 0; i < numkotakDatas; i++) {
-	board.innerHTML += '<div class="kotakData"></div>'; 
+	papanKO.innerHTML += '<div class="kotakData"></div>'; 
 };
 
 var kotakDatas = document.getElementsByClassName("kotakData");
@@ -122,12 +122,12 @@ if (numkotakDatas % 2 !== 0) {
 	};
 } else { 
 	for (i = 0; i < numkotakDatas; i += 1) {
-		if (CekGenap(i/boardSize)) { 
-			for (var kotakDataNum = i; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
+		if (CekGenap(i/papanKOSize)) { 
+			for (var kotakDataNum = i; kotakDataNum < (i + papanKOSize); kotakDataNum += 2) {
 				kotakDatas[kotakDataNum].style.backgroundColor = backdasar;	
 			};
-		} else if (cekSatu(i/boardSize)) {
-			for (var kotakDataNum = i+1; kotakDataNum < (i + boardSize); kotakDataNum += 2) {
+		} else if (cekSatu(i/papanKOSize)) {
+			for (var kotakDataNum = i+1; kotakDataNum < (i + papanKOSize); kotakDataNum += 2) {
 				kotakDatas[kotakDataNum].style.backgroundColor = backdasar;	
 			};
 		} else {
@@ -140,20 +140,20 @@ var indikatorGanti = document.getElementById("indikatorGanti")
 indikatorGanti.style.color = "black";
 indikatorGanti.innerHTML = "X's Turn";
 
-var boardClicks = 0;
+var klikGG = 0;
 
-board.addEventListener("click", function() {
+papanKO.addEventListener("click", function() {
 if (pemenang()) { 
 	indikatorGanti.style.color = "blue";
-	indikatorGanti.innerHTML = winningPlayer[0] + ' WINS !';
-} else if (CekGenap(boardClicks)) {
+	indikatorGanti.innerHTML = pemainW[0] + ' WINS !';
+} else if (CekGenap(klikGG)) {
 	indikatorGanti.style.color = "red";
 	indikatorGanti.innerHTML = "O's Turn";
 } else {
 	indikatorGanti.style.color = "black";
 	indikatorGanti.innerHTML = "X's Turn";
 };
-boardClicks++;
+klikGG++;
 }); 
 
 var kotakDataClicks = [];
@@ -162,63 +162,53 @@ for (var i = 0; i < numkotakDatas; i++) {
 	kotakDataClicks[i] = 0;
 };
 
-var winningPlayer;
+var pemainW;
 
 var pemenang = function() {
 	for (i = 0; i < numkotakDatas; i += 1) { 
-		if ((i % boardSize) == 0) {
-			var rowCheck = [];
-			for (var kotakDataNum = i; kotakDataNum < (i + boardSize); kotakDataNum += 1) { 
-				rowCheck.push(kotakDatas[kotakDataNum].innerHTML);
+		if ((i % papanKOSize) == 0) {
+			var cekCR = [];
+			for (var kotakDataNum = i; kotakDataNum < (i + papanKOSize); kotakDataNum += 1) { 
+				cekCR.push(kotakDatas[kotakDataNum].innerHTML);
 			};
-			console.log('Row ' + i + ' is ' + rowCheck);
-			console.log(cekMirip(rowCheck));
-
-			if (cekMirip(rowCheck)) {
-				winningPlayer = rowCheck; 
+		
+			if (cekMirip(cekCR)) {
+				pemainW = cekCR; 
 				return true;
 			};
 		};
 	};
 	for (i = 0; i < numkotakDatas; i += 1) { 
-		if (i < boardSize) { 
-			var colCheck = [];
-			for (var kotakDataNum = i; kotakDataNum < numkotakDatas; kotakDataNum += boardSize) { 
-				colCheck.push(kotakDatas[kotakDataNum].innerHTML);
+		if (i < papanKOSize) { 
+			var cekCL = [];
+			for (var kotakDataNum = i; kotakDataNum < numkotakDatas; kotakDataNum += papanKOSize) { 
+				cekCL.push(kotakDatas[kotakDataNum].innerHTML);
 			};
-			console.log('Column ' + i + 'is ' + colCheck);
-			console.log(cekMirip(colCheck));
 			
-			if (cekMirip(colCheck)) {
-				winningPlayer = colCheck; 
+			if (cekMirip(cekCL)) {
+				pemainW = cekCL; 
 				return true;
 			};	
 		};
 	};
 	var diag1Check = []; 
 	for (i = 0; i < numkotakDatas; i += 1) { 
-		if ((i % (boardSize + 1)) == 0) { 
-			console.log(i)
+		if ((i % (papanKOSize + 1)) == 0) { 
 			diag1Check.push(kotakDatas[i].innerHTML);
 		};
 	};
-	console.log(diag1Check) 
-	console.log(cekMirip(diag1Check));
 	if (cekMirip(diag1Check)) { 
-		winningPlayer = diag1Check; 
+		pemainW = diag1Check; 
 		return true;
 	};
-	var diag2Check = []; 
-	for (i = (boardSize - 1); i < (numkotakDatas - 1); i += 1) { 
-		if ((i % (boardSize - 1)) == 0) { 
-			console.log(i)
-			diag2Check.push(kotakDatas[i].innerHTML);
+	var cekGT = []; 
+	for (i = (papanKOSize - 1); i < (numkotakDatas - 1); i += 1) { 
+		if ((i % (papanKOSize - 1)) == 0) { 
+			cekGT.push(kotakDatas[i].innerHTML);
 		};
 	};
-	console.log(diag2Check) 
-	console.log(cekMirip(diag2Check));
-	if (cekMirip(diag2Check)) { 
-		winningPlayer = diag2Check; 
+	if (cekMirip(cekGT)) { 
+		pemainW = cekGT; 
 		return true;
 	};
 }; 
@@ -226,14 +216,14 @@ var pemenang = function() {
 var countClicks = function() {
 	var divID = this.getAttribute("id");
 	kotakDataClicks[divID] += 1;
-	if (CekGenap(boardClicks) && kotakDataClicks[divID] == 1) {
+	if (CekGenap(klikGG) && kotakDataClicks[divID] == 1) {
 		this.innerHTML = 'X';
-	} else if (cekSatu(boardClicks) && kotakDataClicks[divID] == 1) {
+	} else if (cekSatu(klikGG) && kotakDataClicks[divID] == 1) {
 		this.innerHTML = 'O';
 		this.style.color = "red";
 	} else if (!pemenang()){
 		alert('Can"t move to this block.');
-		boardClicks -= 1;
+		klikGG -= 1;
 	} else {
 	};
 	if (pemenang()) { 

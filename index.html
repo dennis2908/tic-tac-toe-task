@@ -10,13 +10,12 @@
 	<div id="header">
 		<h1>Gim Tic Tac Toe</h1>
 	</div>
-	
 	<div id="options">
 		<div id="gim"></div>
 		<div id="indikatorGanti"></div>
 		<form id="options">
 			<label for="ukuran_data"><b>Board Type :</b></label>
-				<input id="ukuran_data" type="number" min="2" max="50" onchange='change(this.value)' onkeypress='return validate(event)' onkeyup='change(this.value)' value="3" /><label id="papan">( 3 x 3 )</label>
+				<input id="ukuran_data" type="number" onchange='change(this.value)' onkeypress='return validate(event)' onkeyup='change(this.value)' value="2"  min="2" max="30"/><label id="papan">( 2 x 2 )</label>
 				<div><h4>(Minimal Board Type is 2 x 2)<h4></div>
 		</form>
 		<button id="submit_play">Play</button>
